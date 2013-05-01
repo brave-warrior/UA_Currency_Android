@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+     <item android:id="@+id/menu_update"
+        android:title="@string/menu_update" 
+        android:icon="?attr/menuIconRefresh"
+        android:showAsAction="ifRoom|withText"/>
+     
+    <item android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        android:icon="?attr/menuIconSettings" />
+    
+      <item android:id="@+id/menu_about"
+        android:title="@string/menu_about"
+        android:icon="?attr/menuIconAbout" />
+    
+   
+</menu>

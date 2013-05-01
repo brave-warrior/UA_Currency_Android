@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="app_name">UA Currency</string>
+    <string name="version">Version: </string>
+    <string name="copyrights">© Khmelenko lab</string>
+    <string name="contacts">khmelenko_dmitriy@ukr.net</string>
+    
+    <!--  Main screen  -->
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="no_data">No data is available for current city/bank</string>
+    <string name="updateTime">Updated: %s</string>
+    <string name="currency">Currency: UAH</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_update">Update</string>
+    <string name="menu_about">About</string>
+    
+    <!--  Settings page  -->
+    <string name="title_activity_settings_screen">Settings</string>
+    <string name="CitySelectorLabel">Select city</string>
+    <string name="BankSelectorLabel">Select bank</string>
+    <string name="CityPrefTitle">City</string>
+    <string name="BankPrefTitle">Bank</string>
+    
+    <!--  Currency data -->
+    <string name="sellLabel">Sale</string>
+    <string name="buyLabel">Buy</string>
+    
+    <!--  Network -->
+    <string name="no_connection">No network connection</string>
+    <string name="loading_data">Loading...</string>
+    
+    <!--  About screen  -->
+	<string name="title_activity_about_screen">About</string>
+	
+
+</resources>

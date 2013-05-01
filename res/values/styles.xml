@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="LightThemeSelector" parent="android:Theme">
+        <item name="menuIconRefresh">@drawable/menu_icon_refresh_holo_light</item>
+        <item name="menuIconSettings">@drawable/menu_icon_settings_holo_light</item>
+        <item name="menuIconAbout">@drawable/menu_icon_about_holo_light</item>
+	</style>
+
+</resources>

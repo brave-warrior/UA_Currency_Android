@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.3"
+            android:orientation="vertical"
+            android:padding="6dp" >
+
+            <TextView
+                android:id="@+id/currencyName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="19sp" />
+            
+            <ImageView
+                android:id="@+id/currencyImg"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop ="1dp"
+                 />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" 
+            android:padding="6dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/sellCourse"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:textSize="21sp"
+                android:gravity="center"
+                android:text="Sell course" 
+                android:textColor="@color/course_color"
+               />
+
+            <TextView
+                android:id="@+id/sellDiff"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:text="Sell diff" 
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="6dp"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/buyCourse"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:textSize="21sp"
+                android:gravity="center"
+                android:text="Buy course"
+                android:textColor="@color/course_color"
+                 />
+
+            <TextView
+                android:id="@+id/buyDiff"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:text="Buy diff" 
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<resources>
+
+    <style name="LightThemeSelector" parent="android:Theme.Holo">
+        <item name="menuIconRefresh">@drawable/menu_icon_refresh_holo_dark</item>
+        <item name="menuIconSettings">@drawable/menu_icon_settings_holo_dark</item>
+        <item name="menuIconAbout">@drawable/menu_icon_about_holo_dark</item>
+    </style>
+
+    <declare-styleable name="AppTheme">
+        <attr name="menuIconRefresh" format="reference" />
+        <attr name="menuIconSettings" format="reference" />
+        <attr name="menuIconAbout" format="reference" />
+    </declare-styleable>
+
+</resources>

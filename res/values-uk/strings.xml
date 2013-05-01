@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="app_name">UA Валюта</string>
+    <string name="version">Версія: </string>
+    <string name="copyrights">© Khmelenko lab</string>
+    <string name="contacts">khmelenko_dmitriy@ukr.net</string>
+    
+    <!--  Main screen  -->
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="no_data">Відсутні дані для поточного міста/банку</string>
+    <string name="updateTime">Оновлено: %s</string>
+    <string name="currency">Валюта: UAH</string>
+    <string name="menu_settings">Налаштування</string>
+    <string name="menu_update">Оновити</string>
+    <string name="menu_about">Про програму</string>
+    
+    <!--  Settings page  -->
+    <string name="title_activity_settings_screen">Налаштування</string>
+    <string name="CitySelectorLabel">Вибір міста</string>
+    <string name="BankSelectorLabel">Вибір банку</string>
+    <string name="CityPrefTitle">Місто</string>
+    <string name="BankPrefTitle">Банк</string>
+    
+    <!--  Currency data -->
+    <string name="sellLabel">Продаж</string>
+    <string name="buyLabel">Купівля</string>
+    
+    <!--  Network -->
+    <string name="no_connection">Відсутнє інтернет з\'єднання</string>
+    <string name="loading_data">Завантаження...</string>
+    
+    <!--  About screen  -->
+	<string name="title_activity_about_screen">Про програму</string>
+	
+
+</resources>
