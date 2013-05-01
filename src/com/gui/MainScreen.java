@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -47,36 +46,39 @@ import com.data.Tables;
 import com.khmelenko.lab.currency.R;
 
 /**
+ * Main application screen
  * 
  * @author Dmytro Khmelenko
  * 
  */
 public class MainScreen extends ListActivity {
 
+	/** Application version */
 	public static final String VERSION = "1.01.002";
+
+	/** The resource URL */
 	private final static String RESOURCE_URL = "http://cashexchange.com.ua/XmlApi.ashx";
-	private static final int SETTINGS_REQUEST_CODE = 1;
-	
+
 	// controls
 	private ListView iList;
 	private TextView iUpdateTime;
 	private ProgressDialog iProgressDialog;
-	
+
 	private TextView iSaleLabel;
 	private TextView iBuyLabel;
 	private View iLabelsSeparator;
-	
+
 	private CursorAdapter iAdapter;
-	
+
 	/** Current application settings */
 	private SettingsData iCurrentSettings;
-	
+
 	/** Database engine */
 	private DbEngine iDbEngine;
-	
+
 	/** Asynchronous web task */
 	private WebAsyncTask iTask;
-	
+
 	/*
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -84,49 +86,49 @@ public class MainScreen extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_screen);
-		
+
 		iDbEngine = new DbEngine(this);
 		iDbEngine.open();
-		
+
 		iList = (ListView) findViewById(android.R.id.list);
 		iUpdateTime = (TextView) findViewById(R.id.updateTime);
-		
+
 		iSaleLabel = (TextView) findViewById(R.id.saleLabel);
 		iBuyLabel = (TextView) findViewById(R.id.buyLabel);
 		iLabelsSeparator = findViewById(R.id.labelSeparator);
 
-		
 		iAdapter = new CurrencyAdapter(this, iDbEngine.getAllRawData());
-        iList.setAdapter(iAdapter);
-		
+		iList.setAdapter(iAdapter);
+
 		iTask = new WebAsyncTask();
-		
+
 		iProgressDialog = new ProgressDialog(this);
 		iProgressDialog.setMessage(getString(R.string.loading_data));
 		iProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
-			
+
 			@Override
 			public void onCancel(DialogInterface aDialog) {
 				iTask.cancel(true);
 			}
 		});
-		
+
 		iCurrentSettings = new SettingsData();
 		loadSettings();
-		
 
 	}
 
 	/**
 	 * Sets visibility for the help controls
-	 * @param aVisibility Visibility
+	 * 
+	 * @param aVisibility
+	 *            Visibility
 	 */
 	private void setHelpControlsVisibility(int aVisibility) {
 		iSaleLabel.setVisibility(aVisibility);
 		iBuyLabel.setVisibility(aVisibility);
 		iLabelsSeparator.setVisibility(aVisibility);
 	}
-	
+
 	/*
 	 * @see android.app.Activity#onResume()
 	 */
@@ -135,7 +137,7 @@ public class MainScreen extends ListActivity {
 		super.onResume();
 		loadSettings();
 		updateTitle();
-		
+
 		long updateTime = iDbEngine.getUpdateTime(iCurrentSettings);
 		if (updateTime > 0) {
 			iUpdateTime.setVisibility(View.VISIBLE);
@@ -145,18 +147,21 @@ public class MainScreen extends ListActivity {
 			iUpdateTime.setVisibility(View.GONE);
 			setHelpControlsVisibility(View.GONE);
 		}
-		
+
 		if (isDataOld()) {
 			doUpdate();
 		}
 	}
-	
+
+	/*
+	 * @see android.app.ListActivity#onDestroy()
+	 */
 	@Override
 	protected void onDestroy() {
 		iDbEngine.close();
 		super.onDestroy();
 	}
-	
+
 	/*
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
@@ -165,7 +170,10 @@ public class MainScreen extends ListActivity {
 		getMenuInflater().inflate(R.menu.main_screen, menu);
 		return true;
 	}
-	
+
+	/*
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem aItem) {
 		switch (aItem.getItemId()) {
@@ -173,7 +181,7 @@ public class MainScreen extends ListActivity {
 			doUpdate();
 			break;
 		case R.id.menu_settings:
-			startActivityForResult(new Intent(this, SettingsScreen.class), SETTINGS_REQUEST_CODE);
+			startActivity(new Intent(this, SettingsScreen.class));
 			break;
 		case R.id.menu_about:
 			startActivity(new Intent(this, AboutScreen.class));
@@ -183,34 +191,7 @@ public class MainScreen extends ListActivity {
 		}
 		return super.onOptionsItemSelected(aItem);
 	}
-	
-	/*
-	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
-	 */
-	@Override
-	protected void onActivityResult(int aRequestCode, int aResultCode,
-			Intent aData) {
-		super.onActivityResult(aRequestCode, aResultCode, aData);
-		// TODO Currently unsused
-		switch(aRequestCode) {
-		case SETTINGS_REQUEST_CODE:
-			if (aResultCode == RESULT_OK) {
-				SettingsData prevSettings = iCurrentSettings.clone();
-				loadSettings();
-				updateTitle();
-				if (!prevSettings.equals(iCurrentSettings)) {
-					// clear previous data before update
-					iDbEngine.deleteAll();
-					iAdapter.changeCursor(iDbEngine.getAllRawData());
-					iUpdateTime.setVisibility(View.GONE);
-					setHelpControlsVisibility(View.GONE);
-					doUpdate();
-				}
-			}
-			break;
-		}
-	}
-	
+
 	/**
 	 * Sets time of update
 	 * 
@@ -224,23 +205,25 @@ public class MainScreen extends ListActivity {
 		iUpdateTime.setText(updated);
 		iUpdateTime.setVisibility(View.VISIBLE);
 	}
-	
+
 	/**
 	 * Checks current day and the date of last update
-	 * @return True, if current day is different than day of update. Otherwise, false
+	 * 
+	 * @return True, if current day is different than day of update. Otherwise,
+	 *         false
 	 */
 	private boolean isDataOld() {
 		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 		int currDay = calendar.get(Calendar.DAY_OF_YEAR);
-		
+
 		// settings should be initialized here
 		long updatedDate = iDbEngine.getUpdateTime(iCurrentSettings);
 		calendar.setTimeInMillis(updatedDate);
 		int updatedDay = calendar.get(Calendar.DAY_OF_YEAR);
-		
+
 		return currDay != updatedDay;
 	}
-	
+
 	/**
 	 * Web async task
 	 * 
@@ -269,8 +252,6 @@ public class MainScreen extends ListActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-//			iText.setText("start");
-//			iProgress.setVisibility(View.VISIBLE);
 		}
 
 		/*
@@ -279,15 +260,16 @@ public class MainScreen extends ListActivity {
 		@Override
 		protected void onPostExecute(String aResult) {
 			super.onPostExecute(aResult);
-			
-			Document doc = XmlUtils.getDomElement(aResult); // getting DOM element
-			
+
+			Document doc = XmlUtils.getDomElement(aResult); // getting DOM
+															// element
+
 			if (doc != null) {
-			 
+
 				NodeList nl = doc.getElementsByTagName("Element");
 
 				iDbEngine.deleteAll();
-				
+
 				// looping through all item nodes <item>
 				for (int i = 0; i < nl.getLength(); i++) {
 					Element e = (Element) nl.item(i);
@@ -302,22 +284,24 @@ public class MainScreen extends ListActivity {
 					currency.iBuyDiff = Double.valueOf(buyDelta);
 					currency.iSellCourse = Double.valueOf(sell);
 					currency.iSellDiff = Double.valueOf(sellDelta);
-					
+
 					iDbEngine.insertCurrency(currency);
 				}
 				iAdapter.changeCursor(iDbEngine.getAllRawData());
-				Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+				Calendar calendar = Calendar.getInstance(TimeZone
+						.getTimeZone("UTC"));
 				setUpdateTime(calendar.getTimeInMillis());
 				setHelpControlsVisibility(View.VISIBLE);
-				
-				iDbEngine.insertUserData(iCurrentSettings, calendar.getTimeInMillis());
-				
+
+				iDbEngine.insertUserData(iCurrentSettings,
+						calendar.getTimeInMillis());
+
 				if (iAdapter.isEmpty()) {
 					TextView empty = (TextView) getListView().getEmptyView();
 					empty.setText(R.string.no_data);
 					setHelpControlsVisibility(View.GONE);
 				}
-			
+
 			} else {
 				// if list is empty, show the error on the page
 				if (iAdapter.isEmpty()) {
@@ -326,7 +310,8 @@ public class MainScreen extends ListActivity {
 					iUpdateTime.setVisibility(View.GONE);
 					setHelpControlsVisibility(View.GONE);
 				} else {
-					Toast.makeText(getApplicationContext(), aResult, Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), aResult,
+							Toast.LENGTH_LONG).show();
 				}
 			}
 
@@ -352,7 +337,7 @@ public class MainScreen extends ListActivity {
 				// Execute HTTP Post Request
 				HttpResponse response = httpclient.execute(httppost);
 				int statusCode = response.getStatusLine().getStatusCode();
-				
+
 				if (statusCode == 200) {
 					HttpEntity entity = response.getEntity();
 					String xml = EntityUtils.toString(entity);
@@ -360,7 +345,7 @@ public class MainScreen extends ListActivity {
 				} else {
 					result = response.getStatusLine().getReasonPhrase();
 				}
-				
+
 			} catch (ClientProtocolException e) {
 				String ex = e.toString();
 				result = ex;
@@ -370,21 +355,25 @@ public class MainScreen extends ListActivity {
 			}
 			return result;
 		}
-		
+
 	}
-	
+
+	/**
+	 * Checks whether network connection is available or not
+	 * 
+	 * @return True, if network connection is available. Otherwise, false.
+	 */
 	public boolean isNetworkAvailable() {
-	    ConnectivityManager cm = (ConnectivityManager) 
-	      getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-	    // if no network is available networkInfo will be null
-	    // otherwise check if we are connected
-	    if (networkInfo != null && networkInfo.isConnected()) {
-	        return true;
-	    }
-	    return false;
-	} 
-	
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+		// if no network is available networkInfo will be null
+		// otherwise check if we are connected
+		if (networkInfo != null && networkInfo.isConnected()) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Updates screen title
 	 */
@@ -396,7 +385,7 @@ public class MainScreen extends ListActivity {
 				+ banks[iCurrentSettings.iBank];
 		setTitle(title);
 	}
-	
+
 	/**
 	 * Does request to data update
 	 */
@@ -404,66 +393,60 @@ public class MainScreen extends ListActivity {
 		try {
 			TextView empty = (TextView) getListView().getEmptyView();
 			empty.setText("");
-			
+
 			iTask = new WebAsyncTask();
 			String request = prepareRequest();
 			URL url = new URL(request);
 			iTask.execute(url);
-			
+
 			if (!iProgressDialog.isShowing()) {
-	            iProgressDialog.show();
-	        }
+				iProgressDialog.show();
+			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Prepares request string
+	 * 
 	 * @return request string
 	 */
 	private String prepareRequest() {
 		String requestString = RESOURCE_URL;
-		
+
 		boolean districtSet = false;
 		String[] district = Tables.CITIES.get(iCurrentSettings.iCity);
 		if (district != null) {
 			if (district[0].length() > 0 && district[1].length() > 0) {
-				requestString += "?district=" + district[0] + "&city=" + district[1];
+				requestString += "?district=" + district[0] + "&city="
+						+ district[1];
 				districtSet = true;
 			}
 		}
-		
+
 		String bank = Tables.BANKS.get(iCurrentSettings.iBank);
 		if (bank != null && bank.length() > 0) {
 			char firstChar = districtSet ? '&' : '?';
 			requestString += firstChar + "company=" + bank;
 		}
-		
+
 		return requestString;
-		
+
 	}
-	
+
+	/**
+	 * Loads user settings
+	 */
 	private void loadSettings() {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
-		
-		String city = prefs.getString(
-				SettingsScreen.CITY_PREF_ID, "0");
-		String bank = prefs.getString(
-				SettingsScreen.BANK_PREF_ID, "0");
-		
+
+		String city = prefs.getString(SettingsScreen.CITY_PREF_ID, "0");
+		String bank = prefs.getString(SettingsScreen.BANK_PREF_ID, "0");
+
 		iCurrentSettings.iCity = Integer.valueOf(city);
 		iCurrentSettings.iBank = Integer.valueOf(bank);
-	}
-	
-	/*
-	 * @see android.app.Activity#onConfigurationChanged(android.content.res.Configuration)
-	 */
-	@Override
-	public void onConfigurationChanged(Configuration aNewConfig) {
-		// TODO Auto-generated method stub
-		super.onConfigurationChanged(aNewConfig);
 	}
 
 }

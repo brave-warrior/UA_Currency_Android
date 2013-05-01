@@ -23,22 +23,32 @@ import android.util.Log;
  */
 public class DbEngine {
 
+	/** Database name */
 	public static final String DATABASE_NAME = "currency.db";
-	
+
+	/** Tables in DB */
 	private static final String CURRENCY_TABLE = "current_currency";
 	private static final String USER_TABLE = "user_data";
 
+	/**
+	 * Database helper class
+	 * 
+	 * @author Dmytro Khmelenko
+	 * 
+	 */
 	public static class DbEngineHelper extends SQLiteOpenHelper {
 
+		/** Version of DB */
 		private static final int DATABASE_VERSION = 1;
 
-		// creation table of schedule
+		/** Query for creation currency table */
 		private static final String CURRENCY_TABLE_CREATE = "create table IF NOT EXISTS "
 				+ CURRENCY_TABLE
 				+ " (_id integer primary key autoincrement, "
 				+ "currency_id integer, currency_name text not null, sell real, "
 				+ "buy real, sell_delta real, buy_delta real);";
-		
+
+		/** Query for creationg users table */
 		private static final String USER_TABLE_CREATE = "create table IF NOT EXISTS "
 				+ USER_TABLE
 				+ " (_id integer primary key autoincrement, "
@@ -55,16 +65,14 @@ public class DbEngine {
 		}
 
 		/*
-		 * Called during creation of the database
-		 * 
 		 * @see
 		 * android.database.sqlite.SQLiteOpenHelper#onCreate(android.database
 		 * .sqlite.SQLiteDatabase)
 		 */
 		@Override
-		public void onCreate(SQLiteDatabase database) {
-			database.execSQL(CURRENCY_TABLE_CREATE);
-			database.execSQL(USER_TABLE_CREATE);
+		public void onCreate(SQLiteDatabase aDatabase) {
+			aDatabase.execSQL(CURRENCY_TABLE_CREATE);
+			aDatabase.execSQL(USER_TABLE_CREATE);
 		}
 
 		/*
@@ -75,16 +83,16 @@ public class DbEngine {
 		 * .sqlite.SQLiteDatabase, int, int)
 		 */
 		@Override
-		public void onUpgrade(SQLiteDatabase database, int oldVersion,
-				int newVersion) {
+		public void onUpgrade(SQLiteDatabase aDatabase, int aOldVersion,
+				int aNewVersion) {
 			Log.w(DbEngineHelper.class.getName(),
-					"Upgrading database from version " + oldVersion + " to "
-							+ newVersion + ", which will destroy all old data");
-			onCreate(database);
+					"Upgrading database from version " + aOldVersion + " to "
+							+ aNewVersion + ", which will destroy all old data");
+			onCreate(aDatabase);
 		}
 	}
 
-	// Database Currency fields. 
+	// Database Currency fields.
 	public static final String KEY_ROWID = "_id";
 	public static final String KEY_CURRENCY_ID = "currency_id";
 	public static final String KEY_CURRENCY_NAME = "currency_name";
@@ -92,12 +100,12 @@ public class DbEngine {
 	public static final String KEY_BUY = "buy";
 	public static final String KEY_SELL_DELTA = "sell_delta";
 	public static final String KEY_BUY_DELTA = "buy_delta";
-	
+
 	// Database User fields
 	public static final String KEY_CITY_ID = "city_id";
 	public static final String KEY_BANK_ID = "bank_id";
 	public static final String KEY_TIME_UPDATE = "time_update";
-	
+
 	private Context iContext;
 	private SQLiteDatabase iDatabase;
 	private DbEngineHelper iDbHelper;
@@ -154,7 +162,12 @@ public class DbEngine {
 	}
 
 	/**
-	 * Create a new user data 
+	 * Create a new user data
+	 * 
+	 * @param aSettings
+	 *            App settings
+	 * @param aUpdateTime
+	 *            Time of update
 	 * @return Row id, otherwise return a -1 to indicate failure
 	 */
 	public long insertUserData(SettingsData aSettings, long aUpdateTime) {
@@ -167,12 +180,13 @@ public class DbEngine {
 
 		return id;
 	}
-	
+
 	/**
 	 * Update currency item
 	 * 
 	 * @param aCurrency
 	 *            Currency item to update
+	 * @return True, if success. Otherwise false
 	 */
 	public boolean updateCurrency(Currency aCurrency) {
 		ContentValues newValues = new ContentValues();
@@ -183,12 +197,18 @@ public class DbEngine {
 		newValues.put(KEY_SELL_DELTA, aCurrency.iSellDiff);
 		newValues.put(KEY_BUY_DELTA, aCurrency.iBuyDiff);
 
-		return iDatabase.update(CURRENCY_TABLE, newValues, KEY_CURRENCY_ID + "="
-				+ aCurrency.getCurrencyId(), null) > 0;
+		return iDatabase.update(CURRENCY_TABLE, newValues, KEY_CURRENCY_ID
+				+ "=" + aCurrency.getCurrencyId(), null) > 0;
 	}
-	
+
 	/**
 	 * Update currency item
+	 * 
+	 * @param aSettings
+	 *            App settings
+	 * @param aUpdateTime
+	 *            The time of update
+	 * @return True, if success. Otherwise, false
 	 */
 	public boolean updateUserData(SettingsData aSettings, long aUpdateTime) {
 		ContentValues newValues = new ContentValues();
@@ -202,17 +222,21 @@ public class DbEngine {
 	}
 
 	/**
-	 * Deletes study item
+	 * Deletes currency item in DB
+	 * 
+	 * @param aCurrency
+	 *            Currency item for deletion
+	 * @return True, if success. Otherwise, false
 	 */
-	public boolean deleteCurrency(Currency aStudy) {
-		return iDatabase.delete(CURRENCY_TABLE,
-				KEY_CURRENCY_ID + "=" + aStudy.getCurrencyId(), null) > 0;
+	public boolean deleteCurrency(Currency aCurrency) {
+		return iDatabase.delete(CURRENCY_TABLE, KEY_CURRENCY_ID + "="
+				+ aCurrency.getCurrencyId(), null) > 0;
 	}
 
 	/**
-	 * Deletes all rows in table Currency
+	 * Deletes all rows in tables Currency and Users
 	 * 
-	 * @return True if succeed.
+	 * @return True if succeed. Otherwise, false
 	 */
 	public boolean deleteAll() {
 		boolean result = iDatabase.delete(CURRENCY_TABLE, null, null) > 0;
@@ -223,7 +247,7 @@ public class DbEngine {
 	/**
 	 * Gets the list of all currency items in the database
 	 * 
-	 * @return Cursor over all notes
+	 * @return The list of currencies in DB
 	 */
 	public List<Currency> getAll() {
 		String[] columns = { KEY_ROWID, KEY_CURRENCY_ID, KEY_CURRENCY_NAME,
@@ -247,7 +271,7 @@ public class DbEngine {
 
 		return currencies;
 	}
-	
+
 	/**
 	 * Gets all raw data
 	 * 
@@ -285,22 +309,23 @@ public class DbEngine {
 		int columnIndex = cursor.getColumnIndex(DbEngine.KEY_CURRENCY_NAME);
 		String currencyName = cursor.getString(columnIndex);
 
-		// getting subject 1
+		// getting sell course
 		columnIndex = cursor.getColumnIndex(DbEngine.KEY_SELL);
 		double sell = cursor.getDouble(columnIndex);
 
-		// getting auditorium 1
+		// getting buy course
 		columnIndex = cursor.getColumnIndex(DbEngine.KEY_BUY);
 		double buy = cursor.getDouble(columnIndex);
 
-		// getting tutor name
+		// getting sell difference
 		columnIndex = cursor.getColumnIndex(DbEngine.KEY_SELL_DELTA);
 		double sellDelta = cursor.getDouble(columnIndex);
 
-		// getting subject type
+		// getting buy difference
 		columnIndex = cursor.getColumnIndex(DbEngine.KEY_BUY_DELTA);
 		double buyDelta = cursor.getDouble(columnIndex);
 
+		// fill data
 		Currency currency = new Currency(currencyName);
 		currency.iSellCourse = sell;
 		currency.iBuyCourse = buy;
@@ -309,11 +334,13 @@ public class DbEngine {
 
 		return currency;
 	}
-	
+
 	/**
 	 * Gets time of update
-	 * @param aSettings Current user settings
-	 * @return
+	 * 
+	 * @param aSettings
+	 *            Current user settings
+	 * @return Time of update or -1, if no data is found for requested settings
 	 */
 	public long getUpdateTime(SettingsData aSettings) {
 		String[] columns = { KEY_ROWID, KEY_CITY_ID, KEY_BANK_ID,

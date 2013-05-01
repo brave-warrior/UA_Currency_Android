@@ -19,68 +19,63 @@ import com.data.DbEngine;
 import com.khmelenko.lab.currency.R;
 
 /**
+ * The adapter for the list on main screen
+ * 
  * @author Dmytro Khmelenko
- *
+ * 
  */
 public class CurrencyAdapter extends CursorAdapter {
 
 	private Context iContext;
-	
+
 	/**
 	 * Constructor
-	 * @param aContext Context
-	 * @param aCursor Cursor
+	 * 
+	 * @param aContext
+	 *            Context
+	 * @param aCursor
+	 *            Cursor
 	 */
 	public CurrencyAdapter(Context aContext, Cursor aCursor) {
 		super(aContext, aCursor);
 		iContext = aContext;
 	}
-	
-	/**
-	 * Constructor
-	 * @param aContext
-	 * @param aTextViewResourceId
-	 * @param aObjects
-	 */
-//	public CurrencyAdapter(Context aContext, int aTextViewResourceId,
-//			List<Currency> aObjects) {
-//		super(aContext, aTextViewResourceId, aObjects);
-//		iContext = aContext;
-//		iItems = aObjects;
-//	}
 
 	/*
-	 * @see android.widget.CursorAdapter#bindView(android.view.View, android.content.Context, android.database.Cursor)
+	 * @see android.widget.CursorAdapter#bindView(android.view.View,
+	 * android.content.Context, android.database.Cursor)
 	 */
 	@Override
 	public void bindView(View aView, Context aContext, Cursor aCursor) {
 
 		Currency currency = getCurrency(aCursor);
-		
+
 		// currency name
 		TextView currencyName = (TextView) aView
 				.findViewById(R.id.currencyName);
 		currencyName.setText(currency.getCurrencyName());
 
 		// image
-		ImageView currencyImg = (ImageView) aView.findViewById(R.id.currencyImg);
+		ImageView currencyImg = (ImageView) aView
+				.findViewById(R.id.currencyImg);
 		int currencyImgDrawable = currency.getCurrencyImg();
 		if (currencyImgDrawable != Currency.UNDEFINED) {
-			Drawable currencyDrawable = iContext.getResources().getDrawable(currencyImgDrawable);
+			Drawable currencyDrawable = iContext.getResources().getDrawable(
+					currencyImgDrawable);
 			currencyImg.setImageDrawable(currencyDrawable);
 			currencyImg.setVisibility(View.VISIBLE);
 		} else {
 			currencyImg.setVisibility(View.INVISIBLE);
 		}
-		
-		// sell 
+
+		// sell
 		TextView sellCourse = (TextView) aView.findViewById(R.id.sellCourse);
 		sellCourse.setText(String.format("%.4f", currency.iSellCourse));
-		
+
 		// sell delta
 		TextView sellDiff = (TextView) aView.findViewById(R.id.sellDiff);
 		sellDiff.setText(String.format("%.4f", currency.iSellDiff));
-		
+
 		// buy
 		TextView buyCourse = (TextView) aView.findViewById(R.id.buyCourse);
 		buyCourse.setText(String.format("%.4f", currency.iBuyCourse));
@@ -156,9 +151,9 @@ public class CurrencyAdapter extends CursorAdapter {
 
 		return currency;
 	}
-	
+
 	/**
-	 * Helper class
+	 * Holder class
 	 * 
 	 * @author Dmytro Khmelenko
 	 * 
@@ -172,64 +167,4 @@ public class CurrencyAdapter extends CursorAdapter {
 		public TextView iBuyDiff;
 	}
 
-//    /*
-//     * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
-//     */
-//    @Override
-//    public View getView(int aPosition, View aConvertView, ViewGroup aParent) {
-//        // ViewHolder буферизирует оценку различных полей шаблона элемента
-//
-//        ViewHolder holder;
-//        View rowView = aConvertView;
-//        if (rowView == null) {
-//			LayoutInflater inflater = (LayoutInflater) iContext
-//					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            rowView = inflater.inflate(R.layout.list_item, null, true);
-//            holder = new ViewHolder();
-//            holder.iCurrencyName = (TextView) rowView.findViewById(R.id.currencyName);
-//            holder.iCurrencyImg = (ImageView) rowView.findViewById(R.id.currencyImg);
-//            holder.iSellCourse = (TextView) rowView.findViewById(R.id.sellCourse);
-//            holder.iSellDiff = (TextView) rowView.findViewById(R.id.sellDiff);
-//            holder.iBuyCourse = (TextView) rowView.findViewById(R.id.buyCourse);
-//            holder.iBuyDiff = (TextView) rowView.findViewById(R.id.buyDiff);
-//            rowView.setTag(holder);
-//        } else {
-//            holder = (ViewHolder) rowView.getTag();
-//        }
-//
-//        // Update view holder according to the currency data
-//        Currency currency = iItems.get(aPosition);
-//        holder.iCurrencyName.setText(currency.getCurrencyName());
-//        holder.iBuyCourse.setText(String.valueOf(currency.iBuyCourse));
-//        holder.iBuyDiff.setText(String.valueOf(currency.iBuyDiff));
-//        holder.iSellCourse.setText(String.valueOf(currency.iSellCourse));
-//        holder.iSellDiff.setText(String.valueOf(currency.iSellDiff));
-//        
-//        // color of Sell delta
-//        int diffColor = Color.GRAY;
-//        if (currency.iSellDiff > 0) {
-//        	diffColor = Color.GREEN;
-//        } else if (currency.iSellDiff < 0) {
-//        	diffColor = Color.RED;
-//        }
-//        holder.iSellDiff.setTextColor(diffColor);
-//        
-//        // color of Buy delta
-//        diffColor = Color.GRAY;
-//        if (currency.iBuyDiff > 0) {
-//        	diffColor = Color.GREEN;
-//        } else if (currency.iBuyDiff < 0) {
-//        	diffColor = Color.RED;
-//        }
-//        holder.iBuyDiff.setTextColor(diffColor);
-//        
-//        // update currency image
-//        Drawable currencyImg = iContext.getResources().getDrawable(currency.getCurrencyImg());
-//        holder.iCurrencyImg.setImageDrawable(currencyImg);
-//        
-//        return rowView;
-//    }
-
-
-    
 }

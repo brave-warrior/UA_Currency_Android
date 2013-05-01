@@ -3,17 +3,24 @@
  */
 package com.data;
 
-import com.khmelenko.lab.currency.R;
 
 /**
+ * Application settings data
+ * 
  * @author Dmytro Khmelenko
  * 
  */
-public class SettingsData {
+public class SettingsData implements Cloneable {
 
+	/** The ID of actual city*/
 	public int iCity;
+	
+	/** The ID of actual bank */
 	public int iBank;
 
+	/**
+	 * Constructor
+	 */
 	public SettingsData() {
 		iCity = 0;
 		iBank = 0;
@@ -28,12 +35,12 @@ public class SettingsData {
 			return false;
 		if (!(aO instanceof SettingsData))
 			return false;
-		
+
 		SettingsData that = (SettingsData) aO;
 
 		return iCity == that.iCity && iBank == that.iBank;
 	}
-	
+
 	/*
 	 * @see java.lang.Object#clone()
 	 */

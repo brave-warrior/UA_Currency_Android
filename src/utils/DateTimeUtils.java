@@ -11,11 +11,19 @@ import android.content.Context;
 import android.text.format.DateFormat;
 
 /**
+ * Utilities class for work with DateTime
+ * 
  * @author Dmytro Khmelenko
  * 
  */
 public class DateTimeUtils {
 
+	/**
+	 * Private constructor. Utils class cannot be instantiated
+	 */
+	private DateTimeUtils() {
+		// do nothing
+	}
 
 	/**
 	 * Gets current date in string representation
@@ -35,7 +43,7 @@ public class DateTimeUtils {
 		}
 		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 		calendar.setTimeInMillis(aDate);
-		
+
 		SimpleDateFormat formatter = new SimpleDateFormat(pattern);
 		formatter.setTimeZone(TimeZone.getDefault());
 		String result = formatter.format(calendar.getTimeInMillis());

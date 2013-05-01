@@ -26,6 +26,13 @@ import org.xml.sax.SAXException;
 public class XmlUtils {
 
 	/**
+	 * Private constructor Do not allow to instantiate utils class
+	 */
+	private XmlUtils() {
+		// do nothing
+	}
+
+	/**
 	 * Gets DOM structure
 	 * 
 	 * @param aXml
