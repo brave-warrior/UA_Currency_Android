@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="course_color">#FFFFFF</color>
+    
+    <color name="widget_background_color">#DD555555</color>
+    <color name="widget_stroke_color">#FFEEEEEE</color>
+    <color name="widget_text_color">#FFFFFFFF</color>
 </resources>

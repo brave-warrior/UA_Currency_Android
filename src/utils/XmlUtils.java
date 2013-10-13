@@ -1,5 +1,6 @@
 /**
- * 
+ * Copyright Khmelenko Lab
+ * Author: Dmytro Khmelenko
  */
 package utils;
 
@@ -23,13 +24,12 @@ import org.xml.sax.SAXException;
  * @author Dmytro Khmelenko
  * 
  */
-public class XmlUtils {
+public final class XmlUtils {
 
 	/**
-	 * Private constructor Do not allow to instantiate utils class
+	 * Denied constructor
 	 */
 	private XmlUtils() {
-		// do nothing
 	}
 
 	/**

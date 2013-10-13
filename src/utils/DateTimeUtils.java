@@ -1,5 +1,6 @@
 /**
- * 
+ * Copyright Khmelenko Lab
+ * Author: Dmytro Khmelenko
  */
 package utils;
 
@@ -11,18 +12,17 @@ import android.content.Context;
 import android.text.format.DateFormat;
 
 /**
- * Utilities class for work with DateTime
+ * Provides utils methods for working with the date and time
  * 
  * @author Dmytro Khmelenko
  * 
  */
-public class DateTimeUtils {
+public final class DateTimeUtils {
 
 	/**
-	 * Private constructor. Utils class cannot be instantiated
+	 * Denied constructor
 	 */
 	private DateTimeUtils() {
-		// do nothing
 	}
 
 	/**

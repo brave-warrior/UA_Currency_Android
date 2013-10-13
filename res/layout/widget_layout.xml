@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin" >
+
+    <RelativeLayout
+        android:id="@+id/widget_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_background" >
+
+        <!-- Header -->
+
+        <RelativeLayout
+            android:id="@+id/widget_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/prev_currency"
+                style="@style/widget_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/widget_btn_background"
+                android:padding="5dp"
+                android:scaleType="center"
+                android:src="@drawable/widget_btn_left" />
+
+            <ImageButton
+                android:id="@+id/next_currency"
+                style="@style/widget_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/widget_btn_background"
+                android:padding="5dp"
+                android:scaleType="center"
+                android:src="@drawable/widget_btn_right" />
+
+            <RelativeLayout
+                android:id="@+id/header_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/next_currency"
+                android:layout_toRightOf="@id/prev_currency"
+                android:padding="3dp" >
+
+                <TextView
+                    android:id="@+id/header_city"
+                    style="@style/widget_secondary_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true" 
+                    android:textSize="19sp"/>
+
+                <TextView
+                    android:id="@+id/header_bank"
+                    style="@style/widget_secondary_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/header_city" 
+                    android:textSize="19sp"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!-- Content -->
+
+        <RelativeLayout
+            android:id="@+id/widget_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/widget_header" >
+
+            <!-- Label for showing state Loading -->
+
+            <TextView
+                android:id="@+id/widget_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:text="@string/widgetLoading"
+                android:textSize="25sp"
+                android:visibility="visible" />
+            
+            <!-- Label for showing state No data -->
+
+            <TextView
+                android:id="@+id/widget_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:text="@string/no_data"
+                android:textSize="23sp"
+                android:visibility="gone" />
+
+            <!-- Currency name and the flag -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/widget_loading"
+               >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.2"
+                    android:orientation="vertical"
+                    android:padding="6dp" >
+
+                    <TextView
+                        android:id="@+id/currencyName"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="19sp" />
+
+                    <ImageView
+                        android:id="@+id/currencyImg"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:paddingTop="1dp" />
+                </LinearLayout>
+
+                <!-- Sell course -->
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="6dp" >
+
+                    <TextView
+                        android:id="@+id/sellLabel"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@string/sellLabel"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/sellCourse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textColor="@color/course_color"
+                        android:textSize="21sp" />
+
+                    <TextView
+                        android:id="@+id/sellDiff"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <!-- Buy course -->
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="6dp" >
+
+                    <TextView
+                        android:id="@+id/buyLabel"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@string/buyLabel"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/buyCourse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textColor="@color/course_color"
+                        android:textSize="21sp" />
+
+                    <TextView
+                        android:id="@+id/buyDiff"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:textSize="17sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>

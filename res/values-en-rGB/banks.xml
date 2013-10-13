@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="Banks">
+        <item>All banks</item>
+        <item>Credit Agricole</item>
+        <item>Financy i kredyt</item>
+        <item>Deltabank</item>
+        <item>Raiffaisen bank</item>
+        <item>Bank PUMB</item>
+        <item>VAB bank</item>
+        <item>IMEX bank</item>
+        <item>Alpha bank</item>
+        <item>OTP bank</item>
+        <item>Bank Finansova iniciativa</item>
+        <item>Prominvestbank</item>
+        <item>Pivdennyi bank</item>
+        <item>CreditPromBank</item>
+        <item>Pireus Bank</item>
+        <item>Unicreditbank</item>
+        <item>Bank Forum</item>
+        <item>Bank Khreshchatyk</item>
+        <item>Pivdencombank</item>
+        <item>Rodovid bank</item>
+        <item>Bank Mercury</item>
+        <item>Bank Tavrika</item>
+        <item>Bank Akcent</item>
+        <item>Active Bank</item>
+    </string-array>
+    
+    <string-array name="BankIndexes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+    </string-array>
+    
+</resources>

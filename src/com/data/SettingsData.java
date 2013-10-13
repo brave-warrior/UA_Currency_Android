@@ -1,21 +1,24 @@
 /**
- * 
+ * Copyright Khmelenko Lab
+ * Author: Dmytro Khmelenko
  */
 package com.data;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.gui.SettingsScreen;
 
 /**
- * Application settings data
+ * Contains application settings
  * 
  * @author Dmytro Khmelenko
  * 
  */
-public class SettingsData implements Cloneable {
+public class SettingsData {
 
-	/** The ID of actual city*/
 	public int iCity;
-	
-	/** The ID of actual bank */
 	public int iBank;
 
 	/**
@@ -50,5 +53,22 @@ public class SettingsData implements Cloneable {
 		settings.iBank = this.iBank;
 		settings.iCity = this.iCity;
 		return settings;
+	}
+
+	/**
+	 * Loads application settings from the storage
+	 * 
+	 * @param aContext
+	 *            Application context
+	 */
+	public void loadSettings(Context aContext) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(aContext);
+
+		String city = prefs.getString(SettingsScreen.CITY_PREF_ID, "0");
+		String bank = prefs.getString(SettingsScreen.BANK_PREF_ID, "0");
+
+		iCity = Integer.valueOf(city);
+		iBank = Integer.valueOf(bank);
 	}
 }

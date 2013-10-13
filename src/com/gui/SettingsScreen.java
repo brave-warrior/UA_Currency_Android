@@ -1,10 +1,13 @@
+/**
+ * Copyright Khmelenko Lab
+ * Author: Dmytro Khmelenko
+ */
 package com.gui;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-
 import com.khmelenko.lab.currency.R;
 
 /**
@@ -15,11 +18,9 @@ import com.khmelenko.lab.currency.R;
  */
 public class SettingsScreen extends PreferenceActivity {
 
-	// IDs of setting items
 	public static final String CITY_PREF_ID = "city";
 	public static final String BANK_PREF_ID = "bank";
 
-	// setting items
 	private ListPreference iCityPref;
 	private ListPreference iBankPref;
 
@@ -36,9 +37,10 @@ public class SettingsScreen extends PreferenceActivity {
 
 		String currCity = iCityPref.getEntry().toString();
 		iCityPref.setSummary(currCity);
-
+		
 		String currBank = iBankPref.getEntry().toString();
 		iBankPref.setSummary(currBank);
+
 
 		iCityPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
@@ -83,6 +85,15 @@ public class SettingsScreen extends PreferenceActivity {
 		String[] cities = getResources().getStringArray(R.array.Banks);
 		String newCity = cities[aBankId];
 		iBankPref.setSummary(newCity);
+	}
+
+	/*
+	 * @see android.app.Activity#onBackPressed()
+	 */
+	@Override
+	public void onBackPressed() {
+		setResult(RESULT_OK);
+		super.onBackPressed();
 	}
 
 }

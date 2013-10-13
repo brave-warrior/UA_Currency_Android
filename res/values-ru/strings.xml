@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">UA Валюта</string>
-    <string name="version">Версия: </string>
+    <string name="version">Версия: %s</string>
     <string name="copyrights">© Khmelenko lab</string>
     <string name="contacts">khmelenko_dmitriy@ukr.net</string>
     
@@ -32,5 +32,7 @@
     <!--  About screen  -->
 	<string name="title_activity_about_screen">О программе</string>
 	
-
+	<!-- Widget -->
+	<string name="widgetLoading">Загрузка...</string>
+	
 </resources>

@@ -4,6 +4,26 @@
         <item name="menuIconRefresh">@drawable/menu_icon_refresh_holo_light</item>
         <item name="menuIconSettings">@drawable/menu_icon_settings_holo_light</item>
         <item name="menuIconAbout">@drawable/menu_icon_about_holo_light</item>
-	</style>
+    </style>
+
+    <style name="widget_main_text">
+        <item name="android:textSize">23sp</item>
+        <item name="android:textColor">@color/widget_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="widget_secondary_text">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/widget_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="widget_buttons">
+        <item name="android:gravity">center</item>
+    </style>
 
 </resources>

@@ -1,5 +1,6 @@
 /**
- * 
+ * Copyright Khmelenko Lab
+ * Author: Dmytro Khmelenko
  */
 package com.gui;
 
@@ -19,7 +20,7 @@ import com.data.DbEngine;
 import com.khmelenko.lab.currency.R;
 
 /**
- * The adapter for the list on main screen
+ * Custom adapter for the list items
  * 
  * @author Dmytro Khmelenko
  * 
@@ -153,7 +154,7 @@ public class CurrencyAdapter extends CursorAdapter {
 	}
 
 	/**
-	 * Holder class
+	 * Helper class
 	 * 
 	 * @author Dmytro Khmelenko
 	 * 

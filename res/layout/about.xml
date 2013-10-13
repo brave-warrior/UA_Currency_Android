@@ -1,83 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center" >
 
-    
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			 android:id="@+id/TableLayout03" 
-			 android:layout_height="fill_parent" 
-			 android:layout_width="fill_parent"
-			 android:gravity="center_vertical|center_horizontal">
-			 
-    	<TableRow android:id="@+id/TableRow32" 
-			  android:layout_width="wrap_content" 
-			  android:layout_height="wrap_content"
-			  android:gravity="center_vertical|center_horizontal"
-			  >
-<!-- 		<ImageView android:id="@+id/bannerView"	    		 -->
-<!-- 					android:layout_width="fill_parent"  -->
-<!-- 			  		android:layout_height="100dp" -->
-<!-- 			  		android:gravity="center_vertical|center_horizontal" -->
-<!-- 			  		android:layout_weight="1" -->
-<!-- 			  		android:src="@drawable/me_banner" -->
-<!-- 			  		android:scaleType="fitCenter" -->
-<!-- 			  		/> -->
-	</TableRow>
-	
-	<TableRow android:id="@+id/TableRow31" 
-			  android:layout_width="wrap_content" 
-			  android:layout_height="wrap_content"
-			  android:gravity="center_vertical|center_horizontal">
-		<TextView android:id="@+id/TextView31"
-					android:layout_width="fill_parent" 
-			  		android:layout_height="wrap_content"
-			  		android:gravity="center_vertical|center_horizontal"
-			  		android:textSize="30dp"
-			  		android:layout_weight="1"
-			  		android:text="@string/app_name"/>
-	</TableRow>
-	
+    <TableLayout
+        android:id="@+id/TableLayout03"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center">
 
-		
+        <TableRow
+            android:id="@+id/TableRow32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal" >
 
-	
-	<TableRow android:id="@+id/TableRow33" 
-			  android:layout_width="wrap_content" 
-			  android:layout_height="wrap_content"
-			  android:gravity="center_vertical|center_horizontal">
-		<TextView android:layout_width="fill_parent" 
-				  android:layout_height="wrap_content" 
-				  android:text="@string/version" 
-				  android:gravity="center_vertical|center_horizontal" 
-				  android:id="@+id/version"
-				  android:layout_weight="1"
-				  android:textSize="18dp"/>
-	</TableRow>
-	
-	<TableRow android:id="@+id/TableRow34" 
-			  android:layout_width="wrap_content" 
-			  android:layout_height="wrap_content"
-			  android:gravity="center_vertical|center_horizontal">
-		<TextView android:id="@+id/TextView33"
-					android:layout_width="fill_parent" 
-			  		android:layout_height="wrap_content"
-			  		android:text="@string/copyrights"
-			  		android:gravity="center_vertical|center_horizontal"
-			  		android:layout_weight="1"
-			  		android:textSize="18dp"/>
-	</TableRow>
-	
-	<TableRow android:id="@+id/TableRow35" 
-			  android:layout_width="wrap_content" 
-			  android:layout_height="fill_parent">
-		<TextView android:id="@+id/TextView35"
-					android:layout_width="fill_parent" 
-			  		android:layout_height="wrap_content"
-			  		android:text="@string/contacts"
-			  		android:gravity="center_vertical|center_horizontal"
-			  		android:layout_weight="1"
-			  		android:textSize="18dp"
-			  		android:autoLink="web"/>
-	</TableRow>
-	
+            <ImageView
+                android:id="@+id/bannerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/khmelenko_lab_logo" 
+                android:adjustViewBounds="true"/>
+        </TableRow>
 
-</TableLayout>
+        <TableRow
+            android:id="@+id/TableRow31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal" >
 
+            <TextView
+                android:id="@+id/TextView31"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/app_name"
+                android:textSize="30dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal" >
+
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/version"
+                android:textSize="18dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal" >
+
+            <TextView
+                android:id="@+id/TextView33"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/copyrights"
+                android:textSize="18dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow35"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/TextView35"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autoLink="email"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/contacts"
+                android:textSize="18dp" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

@@ -1,5 +1,6 @@
 /**
- * 
+ * Copyright Khmelenko Lab
+ * Author: Dmytro Khmelenko
  */
 package com.data;
 
@@ -10,13 +11,12 @@ import java.util.Map;
 import com.khmelenko.lab.currency.R;
 
 /**
- * Provides the tables of data for requests and the resources
- * 
+ * Tables of the cities, banks and IDs of the images
  * @author Dmytro Khmelenko
- * 
+ *
  */
 public class Tables {
-
+	
 	public final static Map<Integer, String[]> CITIES = Collections
 			.unmodifiableMap(
 
@@ -25,9 +25,6 @@ public class Tables {
 			 * j.u.HashMap
 			 */
 			new HashMap<Integer, String[]>() {
-				/** Generated serialization ID */
-				private static final long serialVersionUID = -5696639245700050235L;
-
 				{
 					put(0, new String[] { "", "" });
 					put(1, new String[] { "Vinnytsia", "vinnista" });
@@ -67,9 +64,6 @@ public class Tables {
 			 * j.u.HashMap
 			 */
 			new HashMap<Integer, String>() {
-				/** Generated serialization ID */
-				private static final long serialVersionUID = 115317648157082906L;
-
 				{
 					put(0, "");
 					put(1, "indexbank");
@@ -98,7 +92,7 @@ public class Tables {
 				}
 
 			});
-
+	
 	public final static Map<String, Integer> CURRENCY_ID = Collections
 			.unmodifiableMap(
 
@@ -107,9 +101,6 @@ public class Tables {
 			 * j.u.HashMap
 			 */
 			new HashMap<String, Integer>() {
-				/** Generated serialization ID */
-				private static final long serialVersionUID = 3091844832626406064L;
-
 				{
 					put("USD", 0);
 					put("EUR", 1);
@@ -130,7 +121,7 @@ public class Tables {
 				}
 
 			});
-
+	
 	public final static Map<Integer, Integer> FLAGS = Collections
 			.unmodifiableMap(
 
@@ -139,9 +130,6 @@ public class Tables {
 			 * j.u.HashMap
 			 */
 			new HashMap<Integer, Integer>() {
-				/** Generated serialization ID */
-				private static final long serialVersionUID = -2804433789289765089L;
-
 				{
 					put(0, R.drawable.usd);
 					put(1, R.drawable.eur);
@@ -162,5 +150,5 @@ public class Tables {
 				}
 
 			});
-
+	
 }

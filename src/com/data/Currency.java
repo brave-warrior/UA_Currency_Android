@@ -1,17 +1,17 @@
 /**
- * 
+ * Copyright Khmelenko Lab
+ * Author: Dmytro Khmelenko
  */
 package com.data;
 
 /**
- * The structure of currency data
+ * Contains information about currency
  * 
  * @author Dmytro Khmelenko
  * 
  */
 public class Currency {
 
-	/** Undefined data */
 	public static final int UNDEFINED = -1;
 
 	/**
@@ -37,10 +37,10 @@ public class Currency {
 	/** Currency ID */
 	private int iCurrencyId = UNDEFINED;
 
-	/** Short currency name */
+	/** Currency name */
 	private String iCurrencyName;
 
-	/** The ID of resources of the currency image */
+	/** Image of the currency */
 	private int iCurrencyImg = UNDEFINED;
 
 	/** Currency sell course */
@@ -49,10 +49,10 @@ public class Currency {
 	/** Currency buy course */
 	public double iBuyCourse;
 
-	/** Currency sale difference */
+	/** Delta of the sell course */
 	public double iSellDiff;
 
-	/** Currency buy difference */
+	/** Delta of the buy course */
 	public double iBuyDiff;
 
 	/**
@@ -74,9 +74,9 @@ public class Currency {
 	}
 
 	/**
-	 * Gets currency image ID
+	 * Gets currency img
 	 * 
-	 * @return Currency image ID
+	 * @return ID of the currency image
 	 */
 	public int getCurrencyImg() {
 		return iCurrencyImg;
